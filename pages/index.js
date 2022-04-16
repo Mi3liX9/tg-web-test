@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { useEffect } from "react";
-import { useState } from "react/cjs/react.production.min";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [mainButton, setMainButton] = useState(true);
@@ -15,7 +14,7 @@ export default function Home() {
     } else {
       tgApp.MainButton.hide();
     }
-  });
+  }, [mainButton]);
 
   function close() {
     window.Telegram.WebApp.close();
