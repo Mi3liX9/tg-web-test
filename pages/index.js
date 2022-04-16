@@ -11,7 +11,7 @@ export default function Home() {
   });
 
   function close() {
-    tgApp.close();
+    window.Telegram.WebApp.close();
   }
 
   function sendMessage() {
