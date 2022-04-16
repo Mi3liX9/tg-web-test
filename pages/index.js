@@ -4,9 +4,9 @@ export default function Home() {
   if (typeof window !== "undefined") console.log(window.Telegram.WebApp);
 
   function sendMessage() {
-    window.Telegram.WebApp.sendData(
-      "Hello, I am Ali Al-Shaikh from Qatif, Saudi Arabia."
-    );
+    window.Telegram.WebApp.sendData({
+      text: "Hello, I am Ali Al-Shaikh from Qatif, Saudi Arabia.",
+    });
   }
 
   return (
