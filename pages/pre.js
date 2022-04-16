@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 export default function Pre() {
   const [tgApp, setTgApp] = useState(undefined);
 
