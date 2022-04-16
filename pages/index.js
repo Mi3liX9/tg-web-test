@@ -14,8 +14,8 @@ export default function Home() {
     tgApp.MainButton.text = "اضغط لإغلاق الصفحة";
     tgApp.onEvent("mainButtonClicked", close);
 
-    setFirstName(window?.Telegram?.WebApp?.initData?.user?.first_name);
-    setImage(window.Telegram?.WebApp?.initData?.user?.photo_url);
+    setFirstName(window?.Telegram?.WebApp?.initDataUnsafe?.user?.first_name);
+    setImage(window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url);
     if (mainButton) {
       tgApp.MainButton.show();
     } else {
@@ -50,7 +50,7 @@ export default function Home() {
         بعضها يكون بطلب صلاحيات مثل الموقع والكاميرا وبعضها لا، مثل بروفايل
         المستخدم والثيم
       </p>
-      <pre>{JSON.stringify(tgApp, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(tgApp, null, 2)}</pre> */}
       <h2>نظرة على الويب بوت</h2>
       <p>دعنا نلقي نظرة عمّا نستطيع عمله مع الويب بوت:</p>
 
