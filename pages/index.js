@@ -49,7 +49,9 @@ export default function Home() {
         بعضها يكون بطلب صلاحيات مثل الموقع والكاميرا وبعضها لا، مثل بروفايل
         المستخدم والثيم
       </p>
-
+      {window && window.Telegram && (
+        <pre>{JSON.stringify(window.Telegram.WebApp, null, 2)}</pre>
+      )}
       <h2>نظرة على الويب بوت</h2>
       <p>دعنا نلقي نظرة عمّا نستطيع عمله مع الويب بوت:</p>
 
