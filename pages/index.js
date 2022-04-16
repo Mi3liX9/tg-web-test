@@ -9,6 +9,7 @@ export default function Home() {
   const [tgApp, setTgApp] = useState(undefined);
   useEffect(() => {
     setTgApp(window.Telegram.WebApp);
+    const tgApp = window.Telegram.WebApp;
     console.log(tgApp);
     tgApp.MainButton.text = "اضغط لإغلاق الصفحة";
     tgApp.onEvent("mainButtonClicked", close);
