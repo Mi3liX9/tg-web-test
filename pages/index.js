@@ -1,37 +1,42 @@
 import Link from "next/link";
 import { useEffect } from "react";
+import { useState } from "react/cjs/react.production.min";
 
 export default function Home() {
+  const [mainButton, setMainButton] = useState(true);
   useEffect(() => {
     const tgApp = window.Telegram.WebApp;
     console.log(tgApp);
-    tgApp.MainButton.show();
-    tgApp.MainButton.text = "Click me to close";
+    tgApp.MainButton.text = "اضغط لإغلاق الصفحة";
     tgApp.onEvent("mainButtonClicked", close);
+
+    if (mainButton) {
+      tgApp.MainButton.show();
+    } else {
+      tgApp.MainButton.hide();
+    }
   });
 
   function close() {
     window.Telegram.WebApp.close();
   }
 
-  function sendMessage() {
-    window.Telegram.WebApp.sendData({
-      text: "Hello, I am Ali Al-Shaikh from Qatif, Saudi Arabia.",
-    });
+  function toggleMainButton() {
+    setMainButton(!mainButton);
   }
 
   return (
-    <div>
+    <div dir="rtl">
       <p>
-        Hello There, This is <a href="https://t.me/mi3lix9">@mi3lix9</a> first
-        Next.js Telegram web bot!
+        السلام عليكم، معكم علي الشيخ <a href="https://t.me/mi3lix9">@mi3lix9</a>{" "}
+        وهذا اول تطبيق ويب بوت اقوم بانشاءه!
       </p>
       <Link href="/about" passHref>
-        <button>About page</button>
+        <button>حول</button>
       </Link>
 
-      <p>Lets look at what Telegram Bot Web API offer for us:</p>
-      <button onClick={sendMessage}>send a message</button>
+      <p>دعنا نلقي نظرة عمّا نستطيع عمله مع الويب بوت:</p>
+      <button onClick={toggleMainButton}>عرض أو اخفاء الزر السفلي</button>
     </div>
   );
 }
