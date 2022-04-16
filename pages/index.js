@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 
 export default function Home() {
   if (typeof window !== "undefined")
-    console.log(window.Telegram.WebApp.isExpanded);
+    console.log(window.Telegram.WebApp.themeParams);
   return (
     <div className={styles.container}>
       <Head>
