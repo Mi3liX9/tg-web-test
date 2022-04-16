@@ -1,7 +1,18 @@
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Home() {
-  if (typeof window !== "undefined") console.log(window.Telegram.WebApp);
+  useEffect(() => {
+    const tgApp = window.Telegram.WebApp;
+    console.log(tgApp);
+    tgApp.MainButton.show();
+    tgApp.MainButton.text = "Click me to close";
+    tgApp.onEvent("mainButtonClicked", close);
+  });
+
+  function close() {
+    tgApp.close();
+  }
 
   function sendMessage() {
     window.Telegram.WebApp.sendData({
