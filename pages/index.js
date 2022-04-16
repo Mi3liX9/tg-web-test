@@ -4,12 +4,17 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [mainButton, setMainButton] = useState(true);
+  const [firstName, setFirstName] = useState("");
+  const [image, setImage] = useState("");
+
   useEffect(() => {
     const tgApp = window.Telegram.WebApp;
     console.log(tgApp);
     tgApp.MainButton.text = "اضغط لإغلاق الصفحة";
     tgApp.onEvent("mainButtonClicked", close);
 
+    setFirstName(window?.Telegram?.WebApp?.initData?.user?.first_name);
+    setImage(window.Telegram?.WebApp?.initData?.user?.photo_url);
     if (mainButton) {
       tgApp.MainButton.show();
     } else {
@@ -37,13 +42,8 @@ export default function Home() {
       </Link>
 
       <h2>سأخمن من أنت</h2>
-      <p>
-        حياك الله استاذ {window?.Telegram?.WebApp?.initData?.user?.first_name}
-      </p>
-      <img
-        src={window?.Telegram?.WebApp?.initData?.user?.photo_url}
-        alt={window?.Telegram?.WebApp?.initData?.user?.first_name}
-      />
+      <p>حياك الله استاذ {firstName}</p>
+      <img src={image} alt={firstName} />
       <p>
         باستخدام الواجهة البرمجية للويب بوت استطيع معرفى بعض معلومات المستخدم،
         بعضها يكون بطلب صلاحيات مثل الموقع والكاميرا وبعضها لا، مثل بروفايل
