@@ -44,7 +44,10 @@ export default function Home() {
 
       <h2>سأخمن من أنت</h2>
       <p>
-        حياك الله استاذ <a href="/pre">{firstName}</a>
+        حياك الله استاذ{" "}
+        <Link href="/pre" passHref>
+          <a>{firstName}</a>
+        </Link>
       </p>
       <img src={image} alt={firstName} />
       <p>
