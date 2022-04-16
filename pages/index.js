@@ -1,6 +1,14 @@
 import Link from "next/link";
 
 export default function Home() {
+  if (typeof window !== "undefined") console.log(window.Telegram.WebApp);
+
+  function sendMessage() {
+    window.Telegram.WebApp.sendData(
+      "Hello, I am Ali Al-Shaikh from Qatif, Saudi Arabia."
+    );
+  }
+
   return (
     <div>
       <p>
@@ -10,6 +18,9 @@ export default function Home() {
       <Link href="/about" passHref>
         <button>About page</button>
       </Link>
+
+      <p>Lets look at what Telegram Bot Web API offer for us:</p>
+      <button onClick={sendMessage}>send a message</button>
     </div>
   );
 }
