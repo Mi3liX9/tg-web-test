@@ -1,30 +1,29 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useTgApp } from "../src/hooks/useTgApp";
 
 export default function Home() {
   const [mainButton, setMainButton] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [image, setImage] = useState("");
-  const [tgApp, setTgApp] = useState(undefined);
+  const tgApp = useTgApp();
   useEffect(() => {
-    setTgApp(window.Telegram.WebApp);
-    const tgApp = window.Telegram.WebApp;
-    console.log(tgApp);
-    tgApp.MainButton.text = "اضغط لإغلاق الصفحة";
-    tgApp.onEvent("mainButtonClicked", close);
+    tgApp?.MainButton.text = "اضغط لإغلاق الصفحة";
+    tgApp?.onEvent("mainButtonClicked", close);
 
-    setFirstName(window?.Telegram?.WebApp?.initDataUnsafe?.user?.first_name);
-    setImage(window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url);
+    setFirstName(tgApp?.initDataUnsafe?.user?.first_name || "no name");
+    setImage(tgApp?.initDataUnsafe?.user?.photo_url);
+
     if (mainButton) {
-      tgApp.MainButton.show();
+      tgApp?.MainButton.show();
     } else {
-      tgApp.MainButton.hide();
+      tgApp?.MainButton.hide();
     }
   }, [mainButton, tgApp]);
 
   function close() {
-    window.Telegram.WebApp.close();
+    tgApp?.close();
   }
 
   function toggleMainButton() {
@@ -33,7 +32,7 @@ export default function Home() {
 
   return (
     <div dir="rtl">
-      <h2>السلام عليكم</h2>
+      <h2 className="text-blue text-5xl">السلام عليكم</h2>
       <p>
         السلام عليكم، معكم علي الشيخ <a href="https://t.me/mi3lix9">@mi3lix9</a>{" "}
         وهذا اول تطبيق ويب بوت اقوم بانشاءه!
