@@ -8,14 +8,15 @@ export default function Home() {
   const [image, setImage] = useState("");
   const [tgApp, setTgApp] = useState(undefined);
   useEffect(() => {
-    setTgApp(window.Telegram.WebApp);
-    const tgApp = window.Telegram.WebApp;
-    console.log(tgApp);
+    setTgApp((window as any).Telegram.WebApp);
+    const tgApp = (window as any).Telegram.WebApp;
     tgApp.MainButton.text = "اضغط لإغلاق الصفحة";
     tgApp.onEvent("mainButtonClicked", close);
 
-    setFirstName(window?.Telegram?.WebApp?.initDataUnsafe?.user?.first_name);
-    setImage(window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url);
+    setFirstName(
+      (window as any)?.Telegram?.WebApp?.initDataUnsafe?.user?.first_name
+    );
+    setImage((window as any).Telegram?.WebApp?.initDataUnsafe?.user?.photo_url);
     if (mainButton) {
       tgApp.MainButton.show();
     } else {
@@ -24,7 +25,7 @@ export default function Home() {
   }, [mainButton, tgApp]);
 
   function close() {
-    window.Telegram.WebApp.close();
+    (window as any).Telegram.WebApp.close();
   }
 
   function toggleMainButton() {

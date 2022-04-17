@@ -4,7 +4,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "tg-text": "var(--tg-theme-text-color)",
+      },
+    },
   },
   plugins: [],
 };

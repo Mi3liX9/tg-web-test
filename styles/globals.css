@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --primary-text: #000;
+    --primary-color: blue;
+    --button-text-color: #fff;
+    --hint-color: red;
+    --link-color: green;
+    --bg-color: #fff;
+  }
+  .dark {
+    --primary-text: #fff;
+    --primary-color: blue;
+    --button-text-color: #000;
+    --hint-color: red;
+    --link-color: green;
+    --bg-color: #000;
+  }
+
+  .telegram {
+    --primary-text: var(--tg-theme-text-color);
+    --primary-color: var(--tg-theme-button-color);
+    --button-text-color: var(--tg-theme-button-text-color);
+    --hint-color: var(--tg-theme-hint-color);
+    --link-color: var(--tg-theme-link-color);
+    --bg-color: var(--tg-theme-bg-color);
+  }
+
+  body {
+    color: var(--primary-text);
+    background-color: var(--bg-color);
+  }
+  a {
+    color: var(--link-color);
+  }
+
+  button {
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+  }
+}
