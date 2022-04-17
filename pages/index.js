@@ -9,7 +9,7 @@ export default function Home() {
   const [image, setImage] = useState("");
   const tgApp = useTgApp();
   useEffect(() => {
-    tgApp?.MainButton.text = "اضغط لإغلاق الصفحة";
+    // tgApp?.MainButton.text = "اضغط لإغلاق الصفحة";
     tgApp?.onEvent("mainButtonClicked", close);
 
     setFirstName(tgApp?.initDataUnsafe?.user?.first_name || "no name");
