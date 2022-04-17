@@ -9,7 +9,9 @@ export default function Home() {
   const [tgApp, setTgApp] = useState(undefined);
   const [isDark, setIsDark] = useState(undefined);
   useEffect(() => {
-    setIsDark(window.matchMedia("(prefers-color-scheme: dark)"));
+    console.log(window.matchMedia("(prefers-color-scheme: dark)"));
+
+    setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
     setTgApp((window as any).Telegram.WebApp);
     const tgApp = (window as any).Telegram.WebApp;
     tgApp.MainButton.text = "اضغط لإغلاق الصفحة";
