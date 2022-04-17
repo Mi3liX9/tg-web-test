@@ -7,7 +7,9 @@ export default function Home() {
   const [firstName, setFirstName] = useState("");
   const [image, setImage] = useState("");
   const [tgApp, setTgApp] = useState(undefined);
+  const [isDark, setIsDark] = useState(undefined);
   useEffect(() => {
+    setIsDark(window.matchMedia("(prefers-color-scheme: dark)"));
     setTgApp((window as any).Telegram.WebApp);
     const tgApp = (window as any).Telegram.WebApp;
     tgApp.MainButton.text = "اضغط لإغلاق الصفحة";
@@ -42,7 +44,7 @@ export default function Home() {
       <Link href="/about" passHref>
         <button>حول علي الشيخ</button>
       </Link>
-
+      <pre>{JSON.stringify(isDark, null, 2)}</pre>
       <h2>سأخمن من أنت</h2>
       <p>
         حياك الله استاذ{" "}
