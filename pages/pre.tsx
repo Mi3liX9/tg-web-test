@@ -7,5 +7,5 @@ export default function Pre() {
     setTgApp((window as any).Telegram.WebApp);
   }, []);
 
-  return <pre dir="ltr">{JSON.stringify(tgApp, null, 2)}</pre>;
+  return <pre dir="ltr">{JSON.stringify({ tgApp }, null, 2)}</pre>;
 }
