@@ -11,14 +11,6 @@
     --link-color: green;
     --bg-color: #fff;
   }
-  .dark {
-    --primary-text: #fff;
-    --primary-color: green;
-    --button-text-color: #000;
-    --hint-color: blue;
-    --link-color: red;
-    --bg-color: #000;
-  }
 
   .telegram {
     --primary-text: var(--tg-theme-text-color);
@@ -41,4 +33,13 @@
     background-color: var(--primary-color);
     color: var(--button-text-color);
   }
+}
+
+.dark {
+  --primary-text: theme("colors.white");
+  --primary-color: theme("colors.blue.400");
+  --button-text-color: theme("colors.white");
+  --hint-color: theme("colors.blue.400");
+  --link-color: theme("colors.blue.400");
+  --bg-color: theme("colors.gray.800");
 }

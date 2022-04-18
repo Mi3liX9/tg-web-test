@@ -2,39 +2,30 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [mainButton, setMainButton] = useState(true);
-  const [firstName, setFirstName] = useState("");
-  const [image, setImage] = useState("");
+const useTgApp = () => {
   const [tgApp, setTgApp] = useState(undefined);
-  const [isDark, setIsDark] = useState(undefined);
+  const [height, setHeight] = useState(0);
   useEffect(() => {
-    console.log(window.matchMedia("(prefers-color-scheme: dark)"));
-
-    setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    setTgApp((window as any).Telegram.WebApp);
     const tgApp = (window as any).Telegram.WebApp;
-    tgApp.MainButton.text = "اضغط لإغلاق الصفحة";
-    tgApp.onEvent("mainButtonClicked", close);
+    setTgApp(tgApp);
 
-    setFirstName(
-      (window as any)?.Telegram?.WebApp?.initDataUnsafe?.user?.first_name
-    );
-    setImage((window as any).Telegram?.WebApp?.initDataUnsafe?.user?.photo_url);
-    if (mainButton) {
-      tgApp.MainButton.show();
-    } else {
-      tgApp.MainButton.hide();
-    }
-  }, [mainButton, tgApp]);
+    tgApp.onEvent("viewportChanged", () => {
+      setHeight((window as any).Telegram.WebApp.viewportStableHeight);
+    });
 
-  function close() {
-    (window as any).Telegram.WebApp.close();
-  }
+    return () =>
+      tgApp.offEvent("viewportChanged", () =>
+        setHeight((window as any).Telegram.WebApp.viewportStableHeight)
+      );
+  }, [height]);
 
-  function toggleMainButton() {
-    setMainButton(!mainButton);
-  }
+  return tgApp;
+};
+
+export default function Home() {
+  const tgApp = useTgApp();
+
+  function close() {}
 
   return (
     <div dir="rtl">
@@ -46,15 +37,16 @@ export default function Home() {
       <Link href="/about" passHref>
         <button>حول علي الشيخ</button>
       </Link>
-      <pre>{JSON.stringify(isDark, null, 2)}</pre>
+
+      <pre dir="ltr">{JSON.stringify(tgApp, null, 2)}</pre>
       <h2>سأخمن من أنت</h2>
       <p>
         حياك الله استاذ{" "}
-        <Link href="/pre" passHref>
+        {/* <Link href="/pre" passHref>
           <a>{firstName}</a>
-        </Link>
+        </Link> */}
       </p>
-      <img src={image} alt={firstName} />
+
       <p>
         باستخدام الواجهة البرمجية للويب بوت استطيع معرفى بعض معلومات المستخدم،
         بعضها يكون بطلب صلاحيات مثل الموقع والكاميرا وبعضها لا، مثل بروفايل
@@ -63,7 +55,7 @@ export default function Home() {
       <h2>نظرة على الويب بوت</h2>
       <p>دعنا نلقي نظرة عمّا نستطيع عمله مع الويب بوت:</p>
 
-      <button onClick={toggleMainButton}>عرض أو اخفاء الزر السفلي</button>
+      {/* <button onClick={toggleMainButton}>عرض أو اخفاء الزر السفلي</button> */}
     </div>
   );
 }

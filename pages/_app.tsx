@@ -4,7 +4,6 @@ import { useTheme } from "../src/hooks/useTheme";
 
 function MyApp({ Component, pageProps }) {
   useTheme();
-
   return (
     <div>
       <Script
